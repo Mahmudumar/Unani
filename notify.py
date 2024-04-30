@@ -36,7 +36,7 @@ def notify(title, message):
 
 path_to_tt=input('Path to timetable pdf : ')
 t = tt()
-t.read_pdf()
+t.read_pdf(path_to_tt)
 
 
 lectures = [c for c in t.courses]
