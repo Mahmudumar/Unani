@@ -11,7 +11,7 @@ It's base features include:
 
 Future features include:
 1. Identify the time remaining between the current lecture
-     and the next
+    and the next
 """
 
 
@@ -34,12 +34,10 @@ def notify(title, message):
     )
 
 
-c0 = crs('CSC205', 'Monday', '08:00', '09:00', 'Alfa Hall')
-c1 = crs('MTH205', 'Monday', '15:00', '16:00', 'Alfa Hall')
-c2 = crs('mth201', 'Monday', '17:00', '18:00', 'Alfa Hall')
-
+path_to_tt=input('Path to timetable pdf : ')
 t = tt()
-t.add(c0, c1, c2)
+t.read_pdf()
+
 
 lectures = [c for c in t.courses]
 
