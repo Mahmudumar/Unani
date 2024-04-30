@@ -45,13 +45,14 @@ lectures = [c for c in t.courses]
 already_notified = set()
 while True:
     current_time = datetime.now().strftime('%H:%M')
-    current_time = '08:00'  # proxy
+    current_time = '09:00'  # proxy
     current_hour = int(current_time.split(":")[0])
     current_minute = int(current_time.split(":")[1])
 
     for course in lectures:
         if (current_time == course.starttime) and (course not in already_notified):
             notify(f'{course}', f'You have {course} now')
+            print(f'{course}', f'You have {course} now')
             already_notified.add(course)
 
         elif course not in already_notified:
