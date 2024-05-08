@@ -1,5 +1,5 @@
 """NOTE: 
-It is impossible to represent an course in timetable.slots if that course has a time not 
+It is impossible to represent a course in timetable.slots if that course has a time not 
 specified in the timetable.timezones list
 
 so seek to solve this problem
@@ -9,7 +9,7 @@ class Course:
     def __init__(self, code='', day='', starttime='', endtime='', venue='', **info) -> None:
         time_pattern = r"(?P<hour>[0-2][0-9]):(?P<minute>[0-5][0-9])"
         self.code = code.upper()
-        self.day = day
+        self.day = day.title()
         self.date=datetime.now().date()
         
         self.starttime = starttime
@@ -84,9 +84,9 @@ class Timetable:
 
     def _to_course_obj(self):
         """For this method to work properly, you must run the read_pdf() method.
-        or fill the slots manually with the appropriate format
+        or fill the slots manually with the appropriate string format below:
 
-        {MTH101(L)\nDINING HALL} ===> {CourseCode(type)\nVenue}
+        `{MTH101(L)\nDINING HALL} ===> {CourseCode(type)\nVenue}`
         
         """
         for day, row in zip(self.days, self.slots):

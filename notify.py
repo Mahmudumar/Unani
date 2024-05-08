@@ -34,9 +34,11 @@ def notify(title, message):
     )
 
 
-path_to_tt=input('Path to timetable pdf : ')
-t = tt()
-t.read_pdf(path_to_tt)
+c1=crs('mth205','monday','08:00','09:00','Hall B1')
+c2=crs('mth205','monday','09:00','10:00','Hall B1')
+
+t=tt()
+t.add(c1,c2)
 
 
 lectures = [c for c in t.courses]
@@ -45,13 +47,13 @@ lectures = [c for c in t.courses]
 already_notified = set()
 while True:
     current_time = datetime.now().strftime('%H:%M')
-    current_time = '09:00'  # proxy
+    current_time = '08:00'  # proxy
     current_hour = int(current_time.split(":")[0])
     current_minute = int(current_time.split(":")[1])
 
     for course in lectures:
         if (current_time == course.starttime) and (course not in already_notified):
-            notify(f'{course}', f'You have {course} now')
+            notify(f'{course}', f'You have {course} now at {course.venue}\n{course.time}')
             print(f'{course}', f'You have {course} now')
             already_notified.add(course)
 
@@ -64,6 +66,6 @@ while True:
                                        hour=current_hour,
                                        minute=current_minute))
 
-            print(f'waiting for {course} at {course.starttime}')
+            print(f'waiting for {course} at {course.starttime}. (Remaining: {time_remaining})')
 
     time.sleep(1)
