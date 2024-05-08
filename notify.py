@@ -11,7 +11,7 @@ It's base features include:
 
 Future features include:
 1. Identify the time remaining between the current lecture
-     and the next
+    and the next
 """
 
 
@@ -34,12 +34,12 @@ def notify(title, message):
     )
 
 
-c0 = crs('CSC205', 'Monday', '08:00', '09:00', 'Alfa Hall')
-c1 = crs('MTH205', 'Monday', '15:00', '16:00', 'Alfa Hall')
-c2 = crs('mth201', 'Monday', '17:00', '18:00', 'Alfa Hall')
+c1=crs('mth205','monday','08:00','09:00','Hall B1')
+c2=crs('mth205','monday','09:00','10:00','Hall B1')
 
-t = tt()
-t.add(c0, c1, c2)
+t=tt()
+t.add(c1,c2)
+
 
 lectures = [c for c in t.courses]
 
@@ -53,7 +53,8 @@ while True:
 
     for course in lectures:
         if (current_time == course.starttime) and (course not in already_notified):
-            notify(f'{course}', f'You have {course} now')
+            notify(f'{course}', f'You have {course} now at {course.venue}\n{course.time}')
+            print(f'{course}', f'You have {course} now')
             already_notified.add(course)
 
         elif course not in already_notified:
@@ -65,6 +66,6 @@ while True:
                                        hour=current_hour,
                                        minute=current_minute))
 
-            print(f'waiting for {course} at {course.starttime}')
+            print(f'waiting for {course} at {course.starttime}. (Remaining: {time_remaining})')
 
     time.sleep(1)
