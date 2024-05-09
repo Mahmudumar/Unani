@@ -18,6 +18,7 @@ Future features include:
 from course import Timetable as tt, Course as crs
 import time
 from datetime import datetime
+from sched import scheduler
 
 # when it is time for the lecture,
 # notify me saying
@@ -53,8 +54,8 @@ while True:
 
     for course in lectures:
         if (current_time == course.starttime) and (course not in already_notified):
-            notify(f'{course}', f'You have {course} now at {course.venue}\n{course.time}')
-            print(f'{course}', f'You have {course} now')
+            notify(f'Lecture Reminder', f'You have {course} now at {course.venue}\n{course.time}')
+            print(f'{course}', f'You have {course} now at {course.venue}\n{course.time}')
             already_notified.add(course)
 
         elif course not in already_notified:
