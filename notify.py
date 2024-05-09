@@ -18,7 +18,7 @@ Future features include:
 from course import Timetable as tt, Course as crs
 import time
 from datetime import datetime
-from sched import scheduler
+import schedule
 
 # when it is time for the lecture,
 # notify me saying
@@ -43,10 +43,9 @@ t.add(c1,c2)
 
 
 lectures = [c for c in t.courses]
-
 # list of courses i have already notified you of
 already_notified = set()
-while True:
+def check():
     current_time = datetime.now().strftime('%H:%M')
     current_time = '08:00'  # proxy
     current_hour = int(current_time.split(":")[0])
@@ -69,4 +68,10 @@ while True:
 
             print(f'waiting for {course} at {course.starttime}. (Remaining: {time_remaining})')
 
+# Schedule lecture checks every minute
+schedule.every(1).minutes.do(check)
+
+# Run the scheduler
+while True:
+    schedule.run_pending()
     time.sleep(1)
